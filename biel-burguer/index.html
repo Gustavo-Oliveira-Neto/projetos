@@ -221,6 +221,19 @@ h3{font-size:1.14rem;font-weight:700;letter-spacing:-.01em}
 footer{border-top:1px solid var(--line);padding:34px 0;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#57544F}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
+
+/* ---------- identidade ---------- */
+.ident{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px}
+@media(max-width:760px){.ident{grid-template-columns:1fr}}
+.ident figure{margin:0}
+.ident-box{
+  position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,rgba(255,122,24,.14),transparent 62%),var(--ink-2);
+  display:grid;place-items:center;padding:30px;
+}
+.ident-box img{width:100%;height:100%;object-fit:contain}
+.ident figcaption{margin-top:14px;font-size:.88rem;color:var(--muted)}
+
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
 .rv.in{opacity:1;transform:none}
@@ -237,6 +250,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
       <a href="#diagnostico">Diagnóstico</a>
       <a href="#tese">A tese</a>
       <a href="#trabalho">O trabalho</a>
+      <a href="#identidade">Identidade</a>
       <a href="#processo">Processo</a>
     </div>
   </div>
@@ -362,6 +376,25 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   </div>
 </section>
 
+<!-- IDENTIDADE -->
+<section class="section" id="identidade" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow rv">03b — Identidade</span>
+    <h2 class="rv">A marca acompanhando<br>o novo patamar</h2>
+    <p class="lead rv" style="margin-top:20px">O emblema atual funciona impresso, mas some quando vira a bolinha do perfil. Redesenhei mantendo a ideia de fogo que voces ja usam — so que legivel em qualquer tamanho.</p>
+    <div class="ident">
+      <figure class="rv">
+        <div class="ident-box"><img class="logo-img" src="img/logo.png" alt="Logo Biel Burguer redesenhado"><div class="wm"></div></div>
+        <figcaption>Logo principal — o B vira brasa. Funciona em uma cor so, em embalagem e como avatar.</figcaption>
+      </figure>
+      <figure class="rv">
+        <div class="ident-box"><img src="img/capa-destaque.jpg" alt="Capa de destaque" data-fb="https://export-download.canva.com/cXdLE/DAHR2DcXdLE/-1/0/0001-28659702655672251.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260809T174554Z&X-Amz-Expires=32885&X-Amz-Signature=b34b64101e1ba8e3d459cef05e2872fa9266c40d0a7961f78a14f8ca67c8d14c&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2010%20Aug%202026%2002%3A53%3A59%20GMT" onerror="if(!this.dataset.done){this.dataset.done=1;this.src=this.dataset.fb}"><div class="wm"></div></div>
+        <figcaption>Capa de destaque — mesma linguagem nos stories fixados, que hoje repetem o logo.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESSO -->
 <section class="section" id="processo">
   <div class="wrap">
@@ -447,9 +480,12 @@ var LOGO_PH="data:image/svg+xml,"+encodeURIComponent(
   "<text x='150' y='218' font-family='Helvetica,Arial' font-size='24' font-weight='700' fill='rgb(245,241,234)' text-anchor='middle' letter-spacing='2'>BURGUER</text>"+
   "<text x='150' y='244' font-family='Helvetica,Arial' font-size='9' fill='rgb(140,136,128)' text-anchor='middle' letter-spacing='3'>HAMBURGUERIA ARTESANAL</text>"+
   "</svg>");
+var LOGO_CANVA="https://export-download.canva.com/93t1U/DAHR2B93t1U/-1/0/0001-4741676716435806968.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260809T103703Z&X-Amz-Expires=59501&X-Amz-Signature=1fe454ccf010a1cdc0b4e0eba438c90bc8096ac193509ddac3361ac28e2480f6&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2010%20Aug%202026%2003%3A08%3A44%20GMT";
 document.querySelectorAll('.logo-img').forEach(function(el){
-  el.onerror=function(){if(!this.dataset.done){this.dataset.done='1';this.src=LOGO_PH}};
-  if(el.complete&&el.naturalWidth===0){el.dataset.done='1';el.src=LOGO_PH}
+  el.onerror=function(){var s=this.dataset.step||'0';
+    if(s==='0'){this.dataset.step='1';this.src=LOGO_CANVA}
+    else if(s==='1'){this.dataset.step='2';this.src=LOGO_PH}};
+  if(el.complete&&el.naturalWidth===0){el.dataset.step='1';el.src=LOGO_CANVA}
 });
 
 var rail=document.getElementById('rail'),dots=document.getElementById('dots'),notes=document.getElementById('notes');
